@@ -61,8 +61,7 @@ function Detail(props: any) {
       <button className={styles.closeButton} onClick={handleClose}></button>
       <div className={styles.main}>
 
-        <button
-          className={index === 0 ? styles.hiddenButton : styles.backArrow} onClick={decreaseIndex}>
+        <button className={index === 0 ? styles.hiddenButton : styles.backArrow} onClick={decreaseIndex}>
           <Image src={arrow} alt="arrow" />
         </button>
 
@@ -77,12 +76,7 @@ function Detail(props: any) {
           </div>
         </div>
 
-        <button
-          className={
-            index === listLength - 1 ? styles.hiddenButton : styles.arrow
-          }
-          onClick={increaseIndex}
-        >
+        <button className={ index === listLength - 1 ? styles.hiddenButton : styles.arrow } onClick={increaseIndex}>
           <Image src={arrow} alt="arrow" />
         </button>
       </div>

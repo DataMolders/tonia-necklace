@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./Necklaces.module.scss";
 import Image from "next/image";
 
@@ -6,11 +6,20 @@ import { collection, getDocs, getFirestore, limit, orderBy, query, startAfter } 
 import { Necklace } from "@/assets/interfaces";
 
 import necklaceData2 from "./necklaceData";
-import { useRouter } from "next/router";
 import Detail from "./Details/Detail";
+import { useInView } from 'react-intersection-observer';
 
 function Woman() {
-  const router = useRouter();
+  const [initialLoad, setInitialLoad] = useState(true);
+  const { ref, inView, entry } = useInView({
+    /* Optional options */
+    threshold: 0,
+    delay: 800,
+    onChange : (inView)=> {
+      if(inView && !initialLoad) nextPage()
+    }
+  });
+
   const [necklaceData, setNecklaceData] = useState<Necklace[]>([]);
   const [pageSize, setPageSize] = useState(9); // Numero inicial de collares
   const [lastDoc, setLastDoc] = useState(null); // último collar de la lista
@@ -21,7 +30,9 @@ function Woman() {
   }, []);
 
 
+
   const fetchData = async () => {
+  
     console.error("FETCHING DATA")
     try {
       const q = query(
@@ -48,6 +59,7 @@ function Woman() {
         setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1].data().title);
       }
       setPageSize(3); // Setea el numero de elementos despúes de la primera carga
+      setInitialLoad(false);
     } catch (error) {
       console.error("Error fetching data: ", error);
     }
@@ -65,7 +77,6 @@ function Woman() {
     setIndex(index);
     setCurrentNecklace(necklaceData[index]);
     setShowDetails(show => !show);
-    //router.push('/woman/[secondary]');
   };
 
   const increaseIndex: any = () => {
@@ -90,13 +101,13 @@ function Woman() {
             {necklaceData.map((necklace, index) => (
               <button onClick={() => toggleViewDetails(index)} className={styles.image} key={index}>
                 <div className={styles.text}>{necklace.title}</div>
-                <Image width={500} height={500} src={necklace.image} alt={necklace.title} />
+                <Image width={500} height={500} src={necklaceData2[0].image} alt={necklace.title}  />
               </button>
             ))}
           </div>
           <div>
-            <h1>
-              <button onClick={nextPage}>NEXT PAGE</button>
+            <h1 ref={ref}>
+              LOADING 
             </h1>
           </div>
         </div>
