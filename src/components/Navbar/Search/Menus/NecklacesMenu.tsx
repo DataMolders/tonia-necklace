@@ -59,6 +59,7 @@ function NecklacesMenu(props : any) {
   };
 
   const toggleViewDetails = (key : number)=> {
+    props.showSearch(false)
     console.log(key)
     setSelectedNecklace(data[key])
     setShowDetails(show => !show);
@@ -68,14 +69,14 @@ function NecklacesMenu(props : any) {
     return (
       <div id="list">
         <div className={styles.container}>
-                <div className={styles.head}>
-          <div className={styles.subHead}>
-            <button className={styles.backButton} onClick={()=> props.setCurrentMenu("main")}><div>&raquo;</div></button>
-            <div>NECKLACES</div>
+          <div className={styles.head}>
+            <div className={styles.subHead}>
+              <button className={styles.backButton} onClick={()=> props.setCurrentMenu("main")}><div>&raquo;</div></button>
+              <div>NECKLACES</div>
+            </div>
+            <input className={styles.input} onChange={(event) => setQuery(event.target.value)} placeholder="Search..."/>
           </div>
-          <input className={styles.input} onChange={(event) => setQuery(event.target.value)} placeholder="Search..."/>
-        </div>
-        <BeatLoader color="#777777" loading={loading} size={50} />
+          <BeatLoader color="#777777" loading={loading} size={50} />
         </div>
       </div>
     );

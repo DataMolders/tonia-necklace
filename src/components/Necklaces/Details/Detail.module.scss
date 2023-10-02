@@ -7,6 +7,8 @@
   font-family: $font-raleway;
   color: $white;
   background-color: $background;
+  z-index: 100;
+  
 
 
   @include responsive("xlMb") {
@@ -34,7 +36,7 @@
   position: absolute;
   top: 60%;
   transform: translateY(-50%);
-  z-index: 10;
+  z-index: 100;
   transition: opacity 0.3s;
 
   @include responsive("xlMb") {
