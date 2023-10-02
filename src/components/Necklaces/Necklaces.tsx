@@ -75,7 +75,6 @@ function Necklaces() {
     setIndex(index);
     setCurrentNecklace(necklaceData[index]);
     setShowDetails(show => !show);
-    //router.push('/woman/[secondary]');
   };
 
   const increaseIndex: any = () => {

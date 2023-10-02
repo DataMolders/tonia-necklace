@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Detail.module.scss";
 import Image from "next/image";
 import ImageDetail from "../ImageDetails/ImageDetail";
@@ -6,36 +6,15 @@ import { useLanguage } from "@/hooks/LanguageContext";
 
 function Detail(props: any) {
   const [isImageOpen, setIsImageOpen] = useState(false);
-  const [imageClass, setImageClass] = useState("tall")
-  const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
-
   const { currentLanguage, handleEngClick, handleFrClick } = useLanguage();
   const { showComponent, data, increaseIndex, decreaseIndex, index, listLength } = props;
 
   useEffect(() => {
-    //getImageDimensions();
     window.scrollTo({
       top: 0,
     })
   }, [data])
 
-  async function getImageDimensions() {
-    try {
-      const response = await fetch(data.image, { method: 'HEAD' });
-      if (response.ok) {
-        const widthHeader = response.headers.get('x-amz-meta-width'); // Replace with the actual header field name for width
-        const heightHeader = response.headers.get('x-amz-meta-height'); // Replace with the actual header field name for height
-
-        if (widthHeader && heightHeader) {
-          const width = parseInt(widthHeader, 10);
-          const height = parseInt(heightHeader, 10);
-          setImageDimensions({ width, height });
-        }
-      }
-    } catch (error) {
-      console.error('Error fetching image dimensions:', error);
-    }
-  };
 
   const openImage = () => {
     setIsImageOpen(true);

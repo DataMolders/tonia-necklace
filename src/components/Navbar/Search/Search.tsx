@@ -61,9 +61,9 @@ function Search(props: any) {
       {/*SEGUNDO MENU*/}
       <CSSTransition {...transitionProps2}>
         <div className={styles.box}>
-          {currentMenu === "necklaces" && <NecklacesMenu calcHeight ={calcHeight} setCurrentMenu={setCurrentMenu} />}
+          {currentMenu === "necklaces" && <NecklacesMenu calcHeight ={calcHeight} setCurrentMenu={setCurrentMenu} showSearch={props.showSearch}/>}
           {currentMenu === "exhibitions" && <Exhibitions/>}
-          {currentMenu === "press" && <PressMenu calcHeight ={calcHeight} setCurrentMenu={setCurrentMenu} />}
+          {currentMenu === "press" && <PressMenu calcHeight ={calcHeight} setCurrentMenu={setCurrentMenu}/>}
         </div>
       </CSSTransition>
 
