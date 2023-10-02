@@ -120,7 +120,9 @@ function Necklaces() {
       )}
 
       {!loading && showDetails && (
-        <Detail showComponent={toggleViewDetails} data={currentNecklace} increaseIndex={increaseIndex} decreaseIndex={decreaseIndex} index={index} listLength={necklaceData.length} />
+        <div className={styles.detailModal}>
+          <Detail showComponent={toggleViewDetails} data={currentNecklace} increaseIndex={increaseIndex} decreaseIndex={decreaseIndex} index={index} listLength={necklaceData.length} />
+        </div>
       )}
     </>
   );

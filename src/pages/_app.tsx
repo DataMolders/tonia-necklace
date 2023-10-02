@@ -36,6 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Navbar />
         <div className="content">
           <Component {...pageProps} />
+          <div id="portal-root"></div>
         </div>
       </LanguageProvider>
       <Footer />

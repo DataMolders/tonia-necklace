@@ -7,6 +7,8 @@ import { BeatLoader } from "react-spinners";
 import Image from "next/image";
 import Detail from "@/components/Necklaces/Details/Detail";
 
+import { createPortal } from "react-dom"
+
 function NecklacesMenu(props : any) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -15,6 +17,8 @@ function NecklacesMenu(props : any) {
   const [filteredData, setFilteredData] = useState<Necklace[]>([]);
   const [selectedNecklace, setSelectedNecklace] = useState<Necklace>();
   const [showDetails, setShowDetails] = useState(false);
+
+  const portalRoot = document.getElementById("portal-root");
 
   useEffect(() => {
     fetchData();
@@ -71,7 +75,7 @@ function NecklacesMenu(props : any) {
 
   return (
     <>
-    {!showDetails && <div id="list">
+    {<div id="list">
       <div className={styles.container}>
 
         <div className={styles.head}>
@@ -94,9 +98,13 @@ function NecklacesMenu(props : any) {
 
       </div>
     </div>}
-    {showDetails && 
-      <Detail showComponent={toggleViewDetails} data={selectedNecklace} /> 
-    }
+    {showDetails &&
+        createPortal(
+          <div className={styles.detailModal}>
+            <Detail showComponent={toggleViewDetails} data={selectedNecklace} />
+          </div>,
+          portalRoot!
+        )}
     </>
   );
   }
