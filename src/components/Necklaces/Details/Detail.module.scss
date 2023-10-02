@@ -8,6 +8,7 @@
   color: $white;
   background-color: $background;
 
+
   @include responsive("xlMb") {
     height: 100%;
     display: flex;
