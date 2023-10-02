@@ -32,6 +32,18 @@ function NecklacesMenu(props : any) {
     props.calcHeight(document.getElementById("list"));
   }, [filteredData]);
 
+  useEffect(() => {
+    if (showDetails) {
+      document.body.classList.add('modal-open');
+    } else {
+      document.body.classList.remove('modal-open');
+    }
+  
+    return () => {
+      document.body.classList.remove('modal-open');
+    };
+  }, [showDetails]);
+
 
   const fetchData = async () => {
     try {
