@@ -8,6 +8,8 @@ import {
 } from "firebase/auth";
 import DataBaseFeeder from "../dataBaseFeeder";
 import DataBaseFeeder2 from "../dataBaseFeeder2";
+import MainPage from "../MainPage/MainPage"
+
 
 const auth = getAuth();
 
@@ -45,9 +47,10 @@ function Login2() {
     <div>
       {user ? (
         <div>
-            <DataBaseFeeder />
-            <DataBaseFeeder2/>
+            {/*<DataBaseFeeder />
+            <DataBaseFeeder2/>*/}
           <button onClick={handleSignOut}>LOG OUT</button>
+          <MainPage/> 
         </div>
       ) : (
         <div>
@@ -66,7 +69,6 @@ function Login2() {
           {!user ? (
             <div>
               {/*<button onClick={handleSignUp}>SIGN UP</button>*/}
-              <p>Already have an account?</p>
               <button onClick={handleSignIn}>LOG IN</button>
             </div>
           ) : (
